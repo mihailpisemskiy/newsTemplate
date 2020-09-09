@@ -1,0 +1,178 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons;
+
+type
+  TForm1 = class(TForm)
+    GroupBox1: TGroupBox;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    ComboBox1: TComboBox;
+    Memo1: TMemo;
+    Edit1: TEdit;
+    BitBtn1: TBitBtn;
+    ListBox1: TListBox;
+    ListBox2: TListBox;
+    Label1: TLabel;
+    Edit2: TEdit;
+    Label2: TLabel;
+    Edit3: TEdit;
+    Label3: TLabel;
+    Memo2: TMemo;
+    Memo3: TMemo;
+    Label4: TLabel;
+    Label5: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure Edit1Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure ListBox1DblClick(Sender: TObject);
+    procedure ListBox2DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  result_text:string;
+  //39
+  goroda:array[1..39] of string=('Москва','Санкт-Петербург','Барнаул','Биробиджан','Благовещенск','Владивосток','Волгоград',
+  'Воронеж','Екатеринбург','Златоуст','Иркутск','Казань','Калининград','Кемерово','Комсомольск-на-Амуре','Краснодар','Красноярск',
+  'Курган','Курск','Магнитогорск','Набережные Челны','Находка','Нижневартовск','Нижний Новгород','Новокузнецк','Новосибирск',
+  'Омск','Орел','Пермь','Ростов-на-Дону','Сургут','Томск','Тюмень','Улан-Удэ','Уссурийск','Уфа','Хабаровск','Челябинск','Ярославль');
+  goroda_link:array[1..39] of string=(
+  'http://tesgroup.ru/filials/moscow/',             //МОСКВА
+  'http://tesgroup.ru/filials/sankt-peterburg/',    //Санкт-Петербург
+  'http://tesgroup.ru/filials/barnaul/',            //Барнаул
+  'http://tesgroup.ru/filials/birobigan/',          //Биробиджан
+  'http://tesgroup.ru/filials/blag/',               //Благовещенск
+  'http://tesgroup.ru/filials/vladivostok/',        //Владивосток
+  'http://tesgroup.ru/filials/volgograd/',          //Волгоград
+  'http://tesgroup.ru/filials/voronezh/',           //Воронеж
+  'http://tesgroup.ru/filials/ekaterinburg/',       //Екатеринбург
+  'http://tesgroup.ru/filials/zlatoust/',           //Златоуст
+  'http://tesgroup.ru/filials/irkutsk/',            //Иркутск
+  'http://tesgroup.ru/filials/kazan/',              //Казань
+  'http://tesgroup.ru/filials/kaliningrad/',        //Калининград
+  'http://tesgroup.ru/filials/kemerovo/',           //Кемерово
+  'http://tesgroup.ru/filials/koms-in-amur/',       //Комсомольск-на-Амуре
+  'http://tesgroup.ru/filials/krasnodar/',          //Краснодар
+  'http://tesgroup.ru/filials/krasnoyarsk/',        //Красноярск
+  'http://tesgroup.ru/filials/kurgan/',             //Курган
+  'http://tesgroup.ru/filials/kursk/',              //Курск
+  'http://tesgroup.ru/filials/magnit/',             //Магнитогорск
+  'http://tesgroup.ru/filials/n.chelny/',           //Набережные Челны
+  'http://tesgroup.ru/filials/naxodka/',            //Находка
+  'http://tesgroup.ru/filials/nizhevart/',          //Нижневартовск
+  'http://tesgroup.ru/filials/n_novgorod/',         //Нижний Новгород
+  'http://tesgroup.ru/filials/novokuz/',            //Новокузнецк
+  'http://tesgroup.ru/filials/novosibirsk/',        //Новосибирск
+  'http://tesgroup.ru/filials/omsk/',               //Омск
+  'http://tesgroup.ru/filials/orel/',               //Орел
+  'http://tesgroup.ru/filials/perm/',               //Пермь
+  'http://tesgroup.ru/filials/rostov/',             //Ростов-на-Дону
+  'http://tesgroup.ru/filials/surgut/',             //Сургут
+  'http://tesgroup.ru/filials/tomsk/',              //Томск
+  'http://tesgroup.ru/filials/tyumen/',             //Тюмень
+  'http://tesgroup.ru/filials/ulanude/',            //Улан-Удэ
+  'http://tesgroup.ru/filials/ussuriysk/',          //Уссурийск
+  'http://tesgroup.ru/filials/ufa/',                //Уфа
+  'http://tesgroup.ru/filials/xabarovsk/',          //Хабаровск
+  'http://tesgroup.ru/filials/chelyabinsk/',        //Челябинск
+  'http://tesgroup.ru/filials/yaroslavl/');         //Ярославль
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+var
+i:integer;
+begin
+RadioButton1.Checked:=true;
+for i:=1 to 39 do
+ begin
+   Combobox1.Items.Add(goroda[i]);
+   listbox1.Items.Add(goroda[i]);
+   memo2.Lines.Add('<a href="'+goroda_link[i] +'">'+goroda[i]+'</a>');
+ end;
+label1.hide; edit2.Hide; label2.Hide; edit3.Hide; label3.Hide; memo2.Hide; memo3.Hide;
+end;
+
+procedure TForm1.Edit1Click(Sender: TObject);
+begin
+edit1.Text:='';
+end;
+
+procedure TForm1.BitBtn1Click(Sender: TObject);
+var
+kuda,tuda:string;
+goroda_mass:string;
+gorod_x,gorod_xx:string;
+i,j:integer;
+begin
+/////////////////ССЫЛКИ/////////////////////////
+/////////////////ВЫБРАННЫЙ ГОРОД////////////////
+i:=0;
+for i:=1 to 39 do
+  begin
+    if goroda[i] = Combobox1.Items[Combobox1.ItemIndex] then
+      begin
+        gorod_x:=memo2.Lines[i-1];
+        gorod_xx:='<a href="'+goroda_link[i]+'prices/">'+'соответствующей странице'+'</a>';
+      end;
+  end;
+/////////////////В ТЕКСТЕ//////////////////////
+i:=0;j:=0;
+memo3.Clear;
+for i:=0 to listbox2.Items.Count-1 do
+  begin
+    for j:=1 to 39 do
+      begin
+        if listbox2.Items[i] = goroda[j] then
+          begin
+            memo3.Lines.Add(memo2.Lines[j-1]);
+          end;
+      end;
+  end;
+//////////////////////////////////////////////
+memo1.Clear;
+if RadioButton1.Checked = true then kuda:='в';
+if RadioButton2.Checked = true then kuda:='из';
+if RadioButton1.Checked = true then tuda:='из';
+if RadioButton2.Checked = true then tuda:='в';
+
+result_text:='Изменение тарифов на грузовые перевозки '+kuda+' г.'+combobox1.Items[combobox1.ItemIndex];
+memo1.Lines.Add(result_text); edit2.Text:=result_text;
+result_text:='Уважаемые клиенты! Обращаем ваше внимание на изменение тарифов с '+edit1.Text+' на грузовые перевозки '+kuda+' г.'+combobox1.Items[combobox1.ItemIndex];
+memo1.Lines.Add(result_text); edit3.Text:=result_text;
+result_text:='Уважаемые клиенты! Обращаем ваше внимание на изменение тарифов с '+edit1.Text+' на грузовые перевозки '+kuda+' г.'+gorod_x+' '+tuda;
+memo1.Lines.Add(result_text);
+for i:=0 to memo3.Lines.Count-1 do
+ begin
+   goroda_mass:=goroda_mass+' г.'+memo3.Lines[i]+', ';
+ end;
+Delete(goroda_mass,length(goroda_mass)-1,1);
+memo1.Lines[4]:=memo1.Lines[4]+(goroda_mass);
+memo1.Lines.add('С более детальной информацией по тарифам можно ознакомиться на '+gorod_xx+' филиала.');
+
+end;
+
+procedure TForm1.ListBox1DblClick(Sender: TObject);
+begin
+listbox2.Items.Add(listbox1.Items[listbox1.ItemIndex]);
+listbox1.Items.Delete(listbox1.ItemIndex);
+end;
+
+procedure TForm1.ListBox2DblClick(Sender: TObject);
+begin
+listbox1.Items.Add(listbox2.Items[listbox2.ItemIndex]);
+listbox2.Items.Delete(listbox2.ItemIndex);
+end;
+
+end.
